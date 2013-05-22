@@ -9,7 +9,7 @@ using std::endl;
 
 int _tmain(int argc, _TCHAR* argv[])
 {
-
+	_wsetlocale(LC_ALL,L"chs") ;
 	// how to test the function named SetKeyAndValue
 	// 1. we prepare the param 
 	// 1.1 we the	root_path type:LPCTSTR
@@ -19,14 +19,16 @@ int _tmain(int argc, _TCHAR* argv[])
 	// 2. we call the function
 	// 3. we release the memory
 
-	LPCTSTR lpctstr_root_path = TEXT("Software") ;
-	LPCTSTR lpctstr_sub_path = TEXT("Winapp") ;
+	LPCTSTR lpctstr_root_path = TEXT("Software\\Winapp") ;
+	//LPCTSTR lpctstr_sub_path = TEXT("Winapp") ;
 	LPCTSTR lpctstr_sub_name = TEXT("Name") ;
-	char * char_value = "C:\\system32" ;
+	wchar_t * char_value = L"C:\\system32" ;
 
-	SetKeyAndValue(lpctstr_root_path,lpctstr_sub_path,lpctstr_sub_name,
-					strlen(char_value),(BYTE *)char_value) ;
+	SetKeyAndValue(lpctstr_root_path,lpctstr_sub_name,
+					wcslen(char_value)/* the cbSize must describle the the byte size*/,(BYTE *)char_value) ;
 
+
+	getwchar();
 	return 0;
 }
 

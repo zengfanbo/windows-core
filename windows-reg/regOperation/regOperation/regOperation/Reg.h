@@ -11,5 +11,5 @@
  */
 #include <windows.h>
 
-BOOL SetKeyAndValue(LPCTSTR root_path,LPCTSTR sub_path,LPCTSTR sub_name,
+BOOL SetKeyAndValue(LPCTSTR root_path,LPCTSTR sub_name,
 					DWORD dword_length,BYTE * byte_value);
