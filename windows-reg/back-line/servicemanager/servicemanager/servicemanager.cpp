@@ -53,8 +53,32 @@ int _tmain(int argc, _TCHAR* argv[])
 
 	for (DWORD  i = 0 ; i < dword_SerivceReturned; ++i)
 	{
-		wprintf(L"服务名称:%s\t\t",service_status_Result[i].lpServiceName) ;
-		wprintf(L"显示名称:%s\r\n",service_status_Result[i].lpDisplayName) ;
+		//wprintf(L"服务名称:%s\t\t",service_status_Result[i].lpServiceName) ;
+		//wprintf(L"显示名称:%s\r\n",service_status_Result[i].lpDisplayName) ;
+
+		// call the function QueryServiceConfig
+		// 1. perpare the param 
+		// 2. call the function 
+		// 3. display the result
+		// 4. release the alloc memory and resource
+		SC_HANDLE handle_DisplayService = NULL ;
+		LPQUERY_SERVICE_CONFIG queryServiceConfig_Buffer = NULL; 
+		DWORD dword_QueryServiceCount = 0 ;
+
+		handle_DisplayService = OpenService(handle_opened_Manager,service_status_Result[i].lpServiceName,
+											SERVICE_ALL_ACCESS) ;
+		queryServiceConfig_Buffer = (LPQUERY_SERVICE_CONFIG)LocalAlloc(LPTR,64 * 1024) ;
+
+		QueryServiceConfig(handle_DisplayService,queryServiceConfig_Buffer,64 * 1024 ,
+						&dword_QueryServiceCount)  ;
+		if (queryServiceConfig_Buffer->lpBinaryPathName == NULL)
+			GetLastError();
+		wprintf(L"路径:%s\r\n",queryServiceConfig_Buffer->lpBinaryPathName) ;
+
+
+		LocalFree(queryServiceConfig_Buffer) ;
+		CloseServiceHandle(handle_DisplayService) ;
+
 	}
 	if (dword_SerivceReturned == 0)
 	{

@@ -62,3 +62,11 @@ BOOL Format_ErrorMessage(DWORD dword_ErrorCode)
 	LocalFree(tchar_ErrorMessage) ;
 	return true ;
 }
+
+
+LONG RecusiveDeleteKey(HKEY hkey_Parent,const wchar_t * wchar_KeyChild)
+{
+
+	HKEY hkey_Child ;
+
+}
