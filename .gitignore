@@ -1,0 +1,13 @@
+# git ignore file
+*.sln
+*.suo
+*.sdf
+*.vcxproj
+*.vcxproj.filters
+*.vcxproj.user
+*.exe
+*.dll
+*.lib
+DEBUG/
+Release/
+ipch/
